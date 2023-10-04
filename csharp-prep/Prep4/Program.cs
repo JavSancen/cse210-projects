@@ -37,6 +37,7 @@ class Program
             double average = numbers.Average();
             int smallest = numbers.Where(x => x > 0).DefaultIfEmpty(0).Min(); 
             // Minimum positive number
+            //About the solution I found the next information.
             //numbers is assumed to be a collection, such as an array or a list, containing integers.
             //Where(x => x > 0) is a LINQ (Language Integrated Query) extension method. It's used to filter the elements in the numbers collection based on a condition. In this case, it's selecting elements where x (each element in the collection) is greater than 0.
             //DefaultIfEmpty(0) is another LINQ method. It ensures that there's at least one element in the collection, and if the collection is empty, it inserts a default value of 0. This is done to avoid an exception when calling .Min() on an empty collection.
