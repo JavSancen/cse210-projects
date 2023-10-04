@@ -1,47 +1,46 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        List<int> numbers = new List<int>();
+        DisplayWelcome();
+        string userName = PromptUserName();
+        int userNumber = PromptUserNumber();
+        int squaredNumber = SquareNumber(userNumber);
+        DisplayResult(userName, squaredNumber);
+    }
 
-        Console.WriteLine("Enter numbers (enter 0 to finish):");
-        while (true)
+    static void DisplayWelcome()
+    {
+        Console.WriteLine("Welcome to the Program!");
+    }
+
+    static string PromptUserName()
+    {
+        Console.Write("Please enter your name: ");
+        return Console.ReadLine();
+    }
+
+    static int PromptUserNumber()
+    {
+        Console.Write("Please enter your favorite number: ");
+        int number;
+        while (!int.TryParse(Console.ReadLine(), out number))
         {
-            Console.Write("Enter a number or 0 to finish: ");
-            int input;
-            if (int.TryParse(Console.ReadLine(), out input))
-            {
-                if (input == 0)
-                    break;
-
-                numbers.Add(input);
-            }
-            else
-            {
-                Console.WriteLine("Invalid input. Please enter a valid number.");
-            }
+            Console.WriteLine("Invalid input. Please enter a valid integer.");
+            Console.Write("Please enter your favorite number: ");
         }
+        return number;
+    }
 
-        if (numbers.Count == 0)
-        {
-            Console.WriteLine("No numbers entered.");
-        }
-        else
-        {
-            Console.WriteLine("List of Numbers: " + string.Join(", ", numbers));
-            int sum = numbers.Sum();
-            double average = numbers.Average();
-            int smallest = numbers.Where(x => x > 0).DefaultIfEmpty(0).Min(); // Minimum positive number
-            int largest = numbers.Max();
+    static int SquareNumber(int number)
+    {
+        return number * number;
+    }
 
-            Console.WriteLine("Sum of Numbers: " + sum);
-            Console.WriteLine("Average of Numbers: " + average);
-            Console.WriteLine("Smallest Positive Number: " + (smallest > 0 ? smallest.ToString() : "None"));
-            Console.WriteLine("Largest Number: " + largest);
-        }
+    static void DisplayResult(string userName, int squaredNumber)
+    {
+        Console.WriteLine($"Hello, {userName}! Your favorite number squared is: {squaredNumber}");
     }
 }
